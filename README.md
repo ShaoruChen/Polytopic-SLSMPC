@@ -79,7 +79,7 @@ Shaoru Chen, Victor M. Preciado, Manfred Morari, Nikolai Matni\
 Under review of Automatica
 
 ## Installation
-Add the [mpc](https://github.com/ShaoruChen/Lumped-Uncertainty-SLS-MPC/tree/main/mpc) folder to MATLAB path and then you can run the [examples](https://github.com/ShaoruChen/Lumped-Uncertainty-SLS-MPC/tree/main/examples) in the paper. 
+Add the [mpc](https://github.com/ShaoruChen/Polytopic-SLSMPC/tree/main/mpc) folder to MATLAB path and then you can run the [examples](https://github.com/ShaoruChen/Polytopic-SLSMPC/tree/main/examples) in the paper. 
 
 ### Required toolboxes
 [Yalmip](https://yalmip.github.io/) for formulating the control problems. [MOSEK](https://docs.mosek.com/9.3/toolbox/install-interface.html) is used as the default solver in the codes. 

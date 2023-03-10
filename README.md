@@ -36,10 +36,10 @@ We compare SLS MPC with several baselines, including tube-based methods and meth
 
 In the above figures, coverage = (size of the feasible domain of each MPC method)/(size of the maximal robust control invariant set). The denominator is the theoretical upper bound on the feasible domain of any robust MPC method. $\epsilon_A$ denotes the level of model uncertainty and $\sigma_w$ denotes the magnitude of the additive disturbances $w_t$ considered. Note that SLS MPC always achieves more than 90% coverage even when the uncertainty parameters become large. More details about this example are included in the paper. 
 
-# Robust MPC baselines
+## Robust MPC baselines
 Different robust MPC methods are implemented in the mpc folder and are summarized below (naming follows from the SLS MPC paper).
 
-## Tube-based methods
+### Tube-based methods
 
 - (Tube-A)\
 [Robust model predictive control using tubes](https://www.sciencedirect.com/science/article/abs/pii/S0005109803002838?casa_token=Af0HIAR3diAAAAAA:GBx9AXf6S43f7strRflfa-yPYxftN7A2oQKMz_tDXXn59TNMsvGPhLd7dCTFxC9PJ4MarINO8l0)\
@@ -61,7 +61,7 @@ In 2019 IEEE 58th Conference on Decision and Control (CDC), pp. 1383-1388. IEEE,
 Xiaonan Lu, and Mark Cannon. \
 In 2019 American Control Conference (ACC), pp. 3695-3701. IEEE, 2019.
 
-## Uncertainty over-approximation-based methods
+### Uncertainty over-approximation-based methods
 
 - (Lumped-Disturbance-MPC)\
 [A simple robust MPC for linear systems with parametric and additive uncertainty](https://ieeexplore.ieee.org/abstract/document/9482957) \
@@ -73,7 +73,17 @@ In 2021 American Control Conference (ACC), pp. 2108-2113. IEEE, 2021.
 Monimoy Bujarbaruah, Ugo Rosolia, Yvonne R. Stürz, Xiaojing Zhang, and Francesco Borrelli. \
 Automatica 143 (2022): 110459.
 
-- (SLS-MPC)\ 
+- (SLS-MPC) \
 [Robust Model Predictive Control with Polytopic Model Uncertainty through System Level Synthesis](https://arxiv.org/abs/2203.11375)\
 Shaoru Chen, Victor M. Preciado, Manfred Morari, Nikolai Matni\
 Under review of Automatica
+
+## Installation
+Add the [mpc](https://github.com/ShaoruChen/Lumped-Uncertainty-SLS-MPC/tree/main/mpc) folder to MATLAB path and then you can run the [examples](https://github.com/ShaoruChen/Lumped-Uncertainty-SLS-MPC/tree/main/examples) in the paper. 
+
+### Required toolboxes
+[Yalmip](https://yalmip.github.io/) for formulating the control problems. [MOSEK](https://docs.mosek.com/9.3/toolbox/install-interface.html) is used as the default solver in the codes. 
+
+[MPT3](https://www.mpt3.org/) for polyhedron operations. 
+
+[MatlabProgressBar](https://www.mathworks.com/matlabcentral/fileexchange/57895-matlabprogressbar) for progress display (Not required if you remove the progress function in each for-loop, e.g. for i = progress(1:10) --> for i = 1:10).

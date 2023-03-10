@@ -24,6 +24,7 @@ Our proposed method, SLS MPC, has the following features:
 1. It searches linear time-varying state feedback controller $\pi_t(x_{0:t}) = K^{t,t}x_0 + \cdots + K^{t,0}x_t$ where the feedback gains $K^{t,t-i}$ are optimized online. 
 2. Instead of searching the controller parameter $K^{t,t-i}$ directly which often leads to nonconvex optimization, we use [System Level Synthesis](https://arxiv.org/abs/1904.01634) (SLS) to reparameterize the controller in the system response space which reveals useful structures about the robust optimal control problem. 
 3. SLS MPC introduces a virtual additive disturabnce signal to over-approximate the uncertainty effects and simplifies constraint tightening. The reach set of the virtual additive disturbance signal is optimized online jointly with the feedback controller parameters through a set of linear constraints. 
+4. Using the virtual additive disturbances, we can easily derive an upper bound on the worst-case cost of the robust optimal control problem and minimize it.
 
 ### Effectiveness of SLS MPC
 We compare SLS MPC with several baselines, including tube-based methods and methods that also optimize over LTV state feedback controllers, in solving the robust optimal control problem and compare their feasible domains with varying uncertainty parameters. 

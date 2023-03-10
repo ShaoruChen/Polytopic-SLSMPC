@@ -33,5 +33,5 @@ We compare SLS MPC with several baselines, including tube-based methods and meth
 <img src="https://github.com/ShaoruChen/web-materials/blob/main/polytopic_SLS_MPC/coverage_comparison_w.png" width="450" height="400">
 </p>
 
-In the above figures, coverage = (size of the feasible domain of each MPC method)/(size of the maximal robust control invariant set). The denominator is the theoretical upper bound on the feasible domain of any robust MPC method. $\epsilon_A$ denotes the level of model uncertainty and $\sigma_w$ denotes the magnitude of the additive disturbances $w_t$ considered. Note that SLS MPC always achieves more than %90\%$ coverage even when the uncertainty parameters become large. More details about this example are included in the paper. 
+In the above figures, coverage = (size of the feasible domain of each MPC method)/(size of the maximal robust control invariant set). The denominator is the theoretical upper bound on the feasible domain of any robust MPC method. $\epsilon_A$ denotes the level of model uncertainty and $\sigma_w$ denotes the magnitude of the additive disturbances $w_t$ considered. Note that SLS MPC always achieves more than 90% coverage even when the uncertainty parameters become large. More details about this example are included in the paper. 
 

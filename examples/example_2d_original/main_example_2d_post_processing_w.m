@@ -1,7 +1,7 @@
 %% eps_A comparison
 data = load('data/example_2d_diags_list_w_hor_3.mat');
 diags_list_w = data.diags_list;
-w_list = 0.1:0.1:0.7;
+w_list = [0.1];
 
 %% compare the best coverage
 N_eps = length(w_list);

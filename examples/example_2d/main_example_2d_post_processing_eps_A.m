@@ -1,5 +1,5 @@
 %% eps_A comparison
-data = load('data/example_2d_diags_list_eps_A.mat');
+data = load('data/example_2d_diags_list_eps_A_hor_3.mat');
 diags_list_eps_A = data.diags_list;
 eps_A_list = 0.05:0.05:0.45;
 

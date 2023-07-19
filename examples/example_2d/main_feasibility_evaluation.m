@@ -45,7 +45,7 @@ title([diags.method, ', T = ', num2str(mpc.horizon)],'Interpreter','none', 'Font
 
 %% tube-MPC-nominal
 mpc = Tube_MPC_Nominal(MPC_data);
-mpc.assign_cross_section(nominal_min_dist_inv_set);
+% mpc.assign_cross_section(nominal_min_dist_inv_set);
 mpc.offline_initialization();
 
 [diags] = feasibility_evaluation(mpc, x0_set);

@@ -13,7 +13,7 @@ system_params.A = A;
 system_params.B = B;
 
 % consider norm bounded disturbances
-w_list = 0.1:0.1:0.7;
+w_list = [0.1];
 
 N_trials = length(w_list);
 
@@ -27,16 +27,22 @@ for ii = progress(1:N_trials)
     system_params.sigma_w = sigma_w;
     
     % construct model uncertainty set
-    Delta_vertices = cell(1,4);
-    Delta_1 = struct; Delta_1.DA = eps_A*[1 0; 0 0]; Delta_1.DB = eps_B*[0; 1];
-    Delta_2 = struct; Delta_2.DA = eps_A*[1 0; 0 0]; Delta_2.DB = -eps_B*[0; 1];
-    Delta_3 = struct; Delta_3.DA = -eps_A*[1 0; 0 0]; Delta_3.DB = eps_B*[0; 1];
-    Delta_4 = struct; Delta_4.DA = -eps_A*[1 0; 0 0]; Delta_4.DB = -eps_B*[0; 1];
+    DA_cell = {[0 eps_A; eps_A 0], [0 -eps_A; eps_A 0], [0 eps_A; -eps_A 0], [0 -eps_A; -eps_A 0]};
+    DB_cell = {[0; eps_B], [0; -eps_B], [eps_B; 0], [-eps_B; 0]};
+    num_DA = length(DA_cell);
+    num_DB = length(DB_cell);
     
-    Delta_vertices{1} = Delta_1; Delta_vertices{2} = Delta_2; 
-    Delta_vertices{3} = Delta_3; Delta_vertices{4} = Delta_4;
+    Delta_vertices = cell(1, num_DA*num_DB);
+    for kk = 1:num_DA
+        for jj = 1:num_DB
+            Delta = struct;
+            Delta.DA = DA_cell{kk};
+            Delta.DB = DB_cell{jj};
+            Delta_vertices{(kk-1)*num_DA+jj} = Delta; 
+        end
+    end
     system_params.Delta_vertices = Delta_vertices;
-    
+
     system = Uncertain_LTI_System(system_params);
     
     %% state and input constraints

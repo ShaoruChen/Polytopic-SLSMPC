@@ -66,7 +66,7 @@ for ii = progress(1:N_trials)
     MPC_data = struct;
     MPC_data.system = system;
     
-    horizon = 10; 
+    horizon = 3; 
     MPC_data.horizon = horizon;
     
     MPC_data.Q = Q; MPC_data.R = R; MPC_data.Q_T = Q_T;
@@ -84,6 +84,6 @@ for ii = progress(1:N_trials)
     diags_list{ii} = diags_record;
     converge_list(ii) = is_converge;
     
-    save data/example_2d_diags_list_eps_A.mat
+    save data/example_2d_diags_list_eps_A_hor_3.mat
 end
 

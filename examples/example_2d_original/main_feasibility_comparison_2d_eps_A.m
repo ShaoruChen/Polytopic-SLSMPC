@@ -13,30 +13,37 @@ system_params.A = A;
 system_params.B = B;
 
 % consider norm bounded disturbances
-w_list = 0.1:0.1:0.7;
+eps_A_list = 0.12:0.02:0.2;
+% eps_A_list = [0.1];
 
-N_trials = length(w_list);
+N_trials = length(eps_A_list);
 
 diags_list = cell(1, N_trials);
 converge_list = zeros(1, N_trials);
 
 for ii = progress(1:N_trials)
-    sigma_w = w_list(ii);
-    eps_A = 0.1;  eps_B = 0.1;
+    eps_A = eps_A_list(ii);
+    sigma_w = 0.1;  eps_B = 0.1;
     
     system_params.sigma_w = sigma_w;
     
     % construct model uncertainty set
-    Delta_vertices = cell(1,4);
-    Delta_1 = struct; Delta_1.DA = eps_A*[1 0; 0 0]; Delta_1.DB = eps_B*[0; 1];
-    Delta_2 = struct; Delta_2.DA = eps_A*[1 0; 0 0]; Delta_2.DB = -eps_B*[0; 1];
-    Delta_3 = struct; Delta_3.DA = -eps_A*[1 0; 0 0]; Delta_3.DB = eps_B*[0; 1];
-    Delta_4 = struct; Delta_4.DA = -eps_A*[1 0; 0 0]; Delta_4.DB = -eps_B*[0; 1];
+    DA_cell = {[0 eps_A; eps_A 0], [0 -eps_A; eps_A 0], [0 eps_A; -eps_A 0], [0 -eps_A; -eps_A 0]};
+    DB_cell = {[0; eps_B], [0; -eps_B], [eps_B; 0], [-eps_B; 0]};
+    num_DA = length(DA_cell);
+    num_DB = length(DB_cell);
     
-    Delta_vertices{1} = Delta_1; Delta_vertices{2} = Delta_2; 
-    Delta_vertices{3} = Delta_3; Delta_vertices{4} = Delta_4;
+    Delta_vertices = cell(1, num_DA*num_DB);
+    for kk = 1:num_DA
+        for jj = 1:num_DB
+            Delta = struct;
+            Delta.DA = DA_cell{kk};
+            Delta.DB = DB_cell{jj};
+            Delta_vertices{(kk-1)*num_DA+jj} = Delta; 
+        end
+    end
     system_params.Delta_vertices = Delta_vertices;
-    
+
     system = Uncertain_LTI_System(system_params);
     
     %% state and input constraints
@@ -50,10 +57,10 @@ for ii = progress(1:N_trials)
     % stage cost weights
     Q = 10*eye(nx); R = eye(nu); Q_T = Q;
     
-    % uncomment to generate maximum robust positive invariant set
+    % generate maximum robust positive invariant set
     opts = struct;
     opts.robust = 1; opts.minVol = 0.1;
-    [RIS, diagnostic] = system.robust_control_invariant_set(Xc, Uc, 200, opts);
+    [RIS, diagnostic] = system.robust_control_invariant_set(Xc, Uc, 100, opts);
     if ~diagnostic.converge
         warning('The search for maximal control invariant set has not converged.');
         keyboard;
@@ -62,7 +69,7 @@ for ii = progress(1:N_trials)
     end
     save('data/RIS', 'RIS');
     
-    %% construct SLS MPC problem
+    %% construct MPC problem
     MPC_data = struct;
     MPC_data.system = system;
     
@@ -72,17 +79,18 @@ for ii = progress(1:N_trials)
     MPC_data.Q = Q; MPC_data.R = R; MPC_data.Q_T = Q_T;
     MPC_data.state_constr = Xc; 
     MPC_data.input_constr = Uc;
+    
     % MPC_data.terminal_constr = Xc;
     MPC_data.terminal_constr = RIS;
     
     MPC_data.x0 = [3; 0];
     
-    N_grid = 10; N_iter = 200; early_return = 0;
+    N_grid = 10; N_iter = 100; early_return = 0;
     [diags_record, is_converge] = feasibility_comparison(MPC_data, N_grid, N_iter, early_return);
     
     diags_list{ii} = diags_record;
     converge_list(ii) = is_converge;
     
-    save data/example_2d_diags_list_w_hor_3.mat
-
+    save data/example_2d_diags_list_eps_A_hor_3_range.mat
 end
+

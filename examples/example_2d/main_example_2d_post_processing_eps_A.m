@@ -34,21 +34,21 @@ end
 figure;
 hold on 
 for ii = 1:4
-    plot(eps_A_list, best_coverage_mat(:,ii), 's-.', 'LineWidth', 1.0 );
+    plot(eps_A_list, best_coverage_mat(:,ii), 'o-.','MarkerSize', 10, 'LineWidth', 2.0 );
 end
 
 for ii = 5:7
-    plot(eps_A_list, best_coverage_mat(:,ii), 's-', 'LineWidth', 1.0 );
+    plot(eps_A_list, best_coverage_mat(:,ii), 's-', 'MarkerSize', 10, 'LineWidth', 2.0 );
 end
 
 ylim([0 1]);
-xlabel('$\epsilon_A$', 'Interpreter', 'Latex', 'FontSize', 18);
-ylabel('coverage', 'Interpreter', 'Latex', 'FontSize', 18);
+xlabel('$\epsilon_A$', 'Interpreter', 'Latex', 'FontSize', 20);
+ylabel('coverage', 'Interpreter', 'Latex', 'FontSize', 20);
 grid on
 
 legend('Tube-A', 'Tube-B', 'Tube-C', 'Tube-D', ...
                'SLS-MPC', 'Lumped-Disturbance', 'Offline-Tightening', ...
-               'Interpreter', 'latex', 'FontSize', 10, 'Location', 'bestoutside');
+               'Interpreter', 'latex', 'FontSize', 14, 'Location', 'bestoutside');
 set(gca, 'XTick',0.05:0.05:0.45);
 
 %% plot solver time

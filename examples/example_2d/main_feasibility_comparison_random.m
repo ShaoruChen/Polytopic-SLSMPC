@@ -5,7 +5,7 @@ nu = 1;
 
 x0 = [-3; 4];
 
-N_trials = 100;
+N_trials = 120;
 
 diags_list = cell(1, N_trials);
 converge_list = zeros(1, N_trials);
@@ -86,12 +86,9 @@ converge_list(ii) = is_converge;
 
 save MPC_feasibility_random_3
 end
+
 %% post processing
 
-% data = load('MPC_feasibility_random_4.mat', 'diags_list');
-% diags_list_4 = data.diags_list;
-% results_4 = diags_list_4(find(~cellfun(@isempty, diags_list_4)));
-% 
 % data = load('MPC_feasibility_random_3.mat', 'diags_list');
 % diags_list_3 = data.diags_list;
 % results_3 = diags_list_3(find(~cellfun(@isempty, diags_list_3)));
@@ -104,7 +101,69 @@ end
 % diags_list_1 = data.diags_list;
 % results_1 = diags_list_1(find(~cellfun(@isempty, diags_list_1)));
 % 
-% result = [results_4 results_3 results_2 results_1];
+% results = [results_3 results_2 results_1];
 % save('feasibility_random_results.mat', 'result');
-% 
 
+% 
+% N_examples = size(results, 2);
+% 
+% method_cell = {'Tube_MPC', 'Tube_MPC_Homothetic', 'Tube_MPC_Nominal', 'Tube_MPC_Flexible',  ...
+%                'SLS_MPC', 'Lumped_Dist_MPC', 'Constr_Tightening_MPC'};
+% num_method = 7;
+% 
+% best_coverage_mat = zeros(N_examples, num_method);
+% solver_time_mat = zeros(N_examples, num_method);
+% 
+% for ii = 1:N_examples
+%     diags_record = results{ii};
+%     N = length(diags_record);
+% 
+%     contain_empty_diags = 0;
+%     for jj = 1:N
+%         if isempty(diags_record{jj})
+%             contain_empty_diags = 1;
+%         end
+%     end
+% 
+%     if contain_empty_diags == 1
+%         continue
+%     end
+% 
+%     % find the best coverage for each tube-based MPC method
+%     best_coverage = zeros(1, length(method_cell));
+%     for jj = 1:N
+%         diags = diags_record{jj};
+%         if isempty(diags)
+%             keyboard;
+%         end
+% 
+%         method = diags.method;
+%         ind = find(strcmp(method_cell, method));
+% 
+%         coverage = diags.feasible_rate;
+%         if coverage >= best_coverage(ind)
+%             best_coverage(ind) = coverage;
+%             solver_time_mat(ii, ind) = diags.avg_runtime_feasible;
+%         end
+%     end
+%     best_coverage_mat(ii, :) = best_coverage;
+% end
+% 
+% figure;
+% hold on 
+% for ii = 1:4
+%     plot(best_coverage_mat(:,ii), 's-.', 'LineWidth', 1.0 );
+% end
+% 
+% for ii = 5:7
+%     plot(best_coverage_mat(:,ii), 's-', 'LineWidth', 1.0 );
+% end
+% 
+% ylim([0 1]);
+% xlabel('$\epsilon_A$', 'Interpreter', 'Latex', 'FontSize', 18);
+% ylabel('coverage', 'Interpreter', 'Latex', 'FontSize', 18);
+% grid on
+% 
+% legend('Tube-A', 'Tube-B', 'Tube-C', 'Tube-D', ...
+%                'SLS-MPC', 'Lumped-Disturbance', 'Offline-Tightening', ...
+%                'Interpreter', 'latex', 'FontSize', 10, 'Location', 'bestoutside');

@@ -1,5 +1,5 @@
 %% eps_A comparison
-data = load('data/example_2d_diags_list_eps_A_hor_10.mat');
+data = load('data/example_2d_diags_list_eps_A_hor_3.mat');
 diags_list_eps_A = data.diags_list;
 eps_A_list = [0.1];
 
@@ -32,7 +32,7 @@ for ii = 1:N_eps
 end
 
 figure;
-hold on 
+hold on
 for ii = 1:4
     plot(eps_A_list, best_coverage_mat(:,ii), 's-.', 'LineWidth', 1.0 );
 end

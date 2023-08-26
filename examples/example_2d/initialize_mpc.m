@@ -19,7 +19,7 @@ system_params.B = B;
 % sigma_w = 0.1; eps_A = 0.1; eps_B = 0.05;
 
 % parameters for example_2
-sigma_w = 0.1; eps_A = 0.3; eps_B = 0.1;
+sigma_w = 0.1; eps_A = 0.4; eps_B = 0.1;
 
 system_params.sigma_w = sigma_w;
 
@@ -72,7 +72,7 @@ save('data/RIS', 'RIS');
 MPC_data = struct;
 MPC_data.system = system;
 
-horizon = 10; 
+horizon = 3; 
 MPC_data.horizon = horizon;
 
 MPC_data.Q = Q; MPC_data.R = R; MPC_data.Q_T = Q_T;

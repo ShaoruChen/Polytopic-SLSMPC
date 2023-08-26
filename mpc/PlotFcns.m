@@ -8,6 +8,9 @@ classdef PlotFcns
                     fill(P_reduced.V(:, 1), P_reduced.V(:, 2), varargin{1});
                 case 3
                     fill(P_reduced.V(:, 1), P_reduced.V(:, 2), varargin{1}, varargin{2}, varargin{3});
+                case 5
+                    fill(P_reduced.V(:, 1), P_reduced.V(:, 2), varargin{1}, varargin{2}, varargin{3}, varargin{4}, varargin{5});
+
             end
             hold on;
        end

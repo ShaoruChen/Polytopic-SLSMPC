@@ -186,3 +186,7 @@ legend('Tube-A', 'Tube-B', 'Tube-C', 'Tube-D', ...
                'Interpreter', 'latex', 'FontSize', 14, 'Location', 'bestoutside');
 xlabel('exampe number', 'Interpreter', 'Latex', 'FontSize', 20);
 ylabel('coverage', 'Interpreter', 'Latex', 'FontSize', 20);
+
+mean_coverage = mean(best_coverage_mat)
+var_coverage = var(best_coverage_mat)
+

@@ -5,16 +5,14 @@ clear
 close all
 
 %% eps_A comparison
-data = load('data/example_2d_diags_list_eps_A_hor_3.mat');
+data = load('data/example_2d_diags_list_eps_A_0dot4_hor_3.mat');
 diags_list_eps_A = data.diags_list;
-eps_A_list = 0.05:0.05:0.45;
 
-N_eps = length(eps_A_list);
 method_cell = {'Tube_MPC', 'Tube_MPC_Homothetic', 'Tube_MPC_Nominal', 'Tube_MPC_Flexible',  ...
                'SLS_MPC', 'Lumped_Dist_MPC', 'Constr_Tightening_MPC'};
 num_method = 7;
 
-ii= 8;
+ii= 1;
 
 diags_record = diags_list_eps_A{ii};
 N = length(diags_record);
@@ -50,7 +48,7 @@ pg.FaceColor = 'none';
 pg.LineWidth = 2.0;
 
 x0_set = diags_record{1}.x0_set;
-scatter(x0_set(:,1), x0_set(:,2), 'o', 'MarkerEdgeColor', 'none', 'MarkerFaceColor', 0.7*[1 1 1]);
+scatter(x0_set(:,1), x0_set(:,2), 'o', 'MarkerEdgeColor', 'none', 'MarkerFaceColor', 0.8*[1 1 1]);
 
 method_cell = {'Tube-A', 'Tube-B', 'Tube-C', 'Tube-D',  ...
                'SLS-MPC', 'Lumped-Disturbance', 'Offline-Tightening'};

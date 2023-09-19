@@ -30,11 +30,29 @@ Our proposed method, SLS MPC, has the following features:
 We compare SLS MPC with several baselines, including tube-based methods and methods that also optimize over LTV state feedback controllers, in solving the robust optimal control problem and compare their feasible domains with varying uncertainty parameters. 
 
 <p float="left">
-<img src="https://github.com/ShaoruChen/web-materials/blob/main/polytopic_SLS_MPC/coverage_comparison_eps_A.png" width="450" height="400">
-<img src="https://github.com/ShaoruChen/web-materials/blob/main/polytopic_SLS_MPC/coverage_comparison_w.png" width="450" height="400">
+<img src="https://github.com/ShaoruChen/Polytopic-SLSMPC/blob/main/examples/example_2d/figs/coverage_comparison_eps_A.png" width="450" height="400">
+<img src="https://github.com/ShaoruChen/Polytopic-SLSMPC/blob/main/examples/example_2d/figs/feasible_domain_comparison_eps_A_0dot4_hor_3.png" width="450" height="400">
 </p>
 
-In the above figures, coverage = (size of the feasible domain of each MPC method)/(size of the maximal robust control invariant set). The denominator is the theoretical upper bound on the feasible domain of any robust MPC method. $\epsilon_A$ denotes the level of model uncertainty and $\sigma_w$ denotes the magnitude of the additive disturbances $w_t$ considered. Note that SLS MPC always achieves more than 90% coverage even when the uncertainty parameters become large. More details about this example are included in the paper. 
+In the first figure, coverage = (size of the feasible domain of each MPC method)/(size of the maximal robust control invariant set). The denominator is the theoretical upper bound on the feasible domain of any robust MPC method. $\epsilon_A$ denotes the level of model uncertainty. Note that SLS MPC always achieves more than 90% coverage even when the uncertainty parameters become large and is resilient to the change of MPC horizon. In the second figure, we directly plot the feasible domain estimations of different robust MPC methods. 
+
+In the following figure, we compare the coverages of different robust MPC methods on randomly generated systems and observe that SLS MPC achieves the best coverage in almost all examples, often with a significant tightness margin compared with the second-best method.
+
+<p float="left">
+<img src="https://github.com/ShaoruChen/Polytopic-SLSMPC/blob/main/examples/example_random/random_comparison.png" width="450" height="400">
+</p>
+
+More details about these examples are included in the paper. 
+
+## Installation
+Add the [mpc](https://github.com/ShaoruChen/Polytopic-SLSMPC/tree/main/mpc) folder to MATLAB path and then you can run the [examples](https://github.com/ShaoruChen/Polytopic-SLSMPC/tree/main/examples) in the paper. 
+
+### Required toolboxes
+[Yalmip](https://yalmip.github.io/) for formulating the control problems. [MOSEK](https://docs.mosek.com/9.3/toolbox/install-interface.html) is used as the default solver in the codes. 
+
+[MPT3](https://www.mpt3.org/) for polyhedron operations. 
+
+[MatlabProgressBar](https://www.mathworks.com/matlabcentral/fileexchange/57895-matlabprogressbar) for progress display (Not required if you remove the progress function in each for-loop, e.g. for i = progress(1:10) --> for i = 1:10).
 
 ## Robust MPC baselines
 Different robust MPC methods are implemented in the [mpc](https://github.com/ShaoruChen/Polytopic-SLSMPC/tree/main/mpc) folder and are summarized below (naming follows from the SLS MPC paper).
@@ -78,12 +96,4 @@ Automatica 143 (2022): 110459.
 Shaoru Chen, Victor M. Preciado, Manfred Morari, Nikolai Matni\
 Under review of Automatica
 
-## Installation
-Add the [mpc](https://github.com/ShaoruChen/Polytopic-SLSMPC/tree/main/mpc) folder to MATLAB path and then you can run the [examples](https://github.com/ShaoruChen/Polytopic-SLSMPC/tree/main/examples) in the paper. 
 
-### Required toolboxes
-[Yalmip](https://yalmip.github.io/) for formulating the control problems. [MOSEK](https://docs.mosek.com/9.3/toolbox/install-interface.html) is used as the default solver in the codes. 
-
-[MPT3](https://www.mpt3.org/) for polyhedron operations. 
-
-[MatlabProgressBar](https://www.mathworks.com/matlabcentral/fileexchange/57895-matlabprogressbar) for progress display (Not required if you remove the progress function in each for-loop, e.g. for i = progress(1:10) --> for i = 1:10).

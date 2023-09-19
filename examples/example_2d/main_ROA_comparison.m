@@ -1,3 +1,6 @@
+% estimate the feasible domain of different robust MPC methods by
+% grid-searching over the initial conditions. 
+
 clear;
 %% initialization
 nx = 2;

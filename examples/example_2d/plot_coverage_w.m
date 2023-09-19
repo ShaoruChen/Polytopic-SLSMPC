@@ -1,3 +1,6 @@
+% plot the coverage of each robust MPC method with varying sizes of
+% disturbances for horizon = 3 and 10. 
+
 clear
 close all
 
@@ -49,12 +52,14 @@ end
 
 
 grid on
-set(gca, 'XTick',0.05:0.05:0.45);
+set(gca, 'XTick',w_list);
 ax = gca; % get handle to the current axes
 ax.FontSize = 22;
-text(0.75, 0.85, 'hor.=3', 'FontSize', 24, 'FontWeight', 'bold','Units', 'normalized')
+text(0.05, 0.1, 'hor.=3', 'FontSize', 24, 'FontWeight', 'bold','Units', 'normalized')
 
 ylim([0 1]);
+xlim([0.1 0.7]);
+
 xlabel('$\sigma_w$', 'Interpreter', 'Latex', 'FontSize', 28);
 ylabel('coverage', 'Interpreter', 'Latex', 'FontSize', 28);
 
@@ -115,9 +120,10 @@ set(gca, 'XTick',w_list);
 ax = gca; % get handle to the current axes
 ax.FontSize = 22;
 
-text(0.75, 0.85, 'hor.=10', 'FontSize', 24, 'FontWeight', 'bold','Units', 'normalized')
+text(0.05, 0.1, 'hor.=10', 'FontSize', 24, 'FontWeight', 'bold','Units', 'normalized')
 
 ylim([0 1]);
+xlim([0.1 0.7]);
 xlabel('$\sigma_w$', 'Interpreter', 'Latex', 'FontSize', 28);
 ylabel('coverage', 'Interpreter', 'Latex', 'FontSize', 28);
 

@@ -4,7 +4,7 @@ This repository contains codes to implement the robust model predictive control 
 
 [Robust Model Predictive Control with Polytopic Model Uncertainty through System Level Synthesis](https://arxiv.org/abs/2203.11375)\
 Shaoru Chen, Victor M. Preciado, Manfred Morari, Nikolai Matni\
-Under review of Automatica
+Automatica, 2024
 
 and the robust MPC baselines therein. 
 
